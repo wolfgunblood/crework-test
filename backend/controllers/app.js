@@ -52,7 +52,7 @@ const deleteTask = asyncWrapper(async (req, res, next) => {
   if (!todo) {
     return next(Error(`No todo with ID ${taskId}`, 404));
   }
-  todo = await Tasks.deleteOne({ _id: taskId, createdBy: userId });
+  await Tasks.deleteOne({ _id: taskId, createdBy: userId });
   return res.status(200).send("task deleted!!!");
 });
 
