@@ -1,0 +1,5 @@
+{ "version": 2,
+    "name" : "crework-test",
+    "builds" : [{ "source": "app.js", "use": "@vercel/node" }],
+    "routes" : [{ "source": "/(.*)", "destination": "/app.js" }]
+}
