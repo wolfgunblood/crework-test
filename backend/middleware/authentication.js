@@ -1,11 +1,16 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const { UnauthenticatedError } = require("../errors");
+const { StatusCodes } = require("http-status-codes");
+// const { UnauthenticatedError } = require("../errors");
 
 const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer")) {
-    throw new UnauthenticatedError("Authentication invalid");
+  try {
+    if (!authHeader || !authHeader.startsWith("Bearer")) {
+      throw new Error("Authentication invalid");
+    }
+  } catch (error) {
+    return res.status(StatusCodes.UNAUTHORIZED).send(error.message);
   }
   const token = authHeader.split(" ")[1];
 
@@ -14,7 +19,7 @@ const auth = async (req, res, next) => {
     req.user = { userId: payload.userId, name: payload.name };
     next();
   } catch (error) {
-    throw new UnauthenticatedError("Authentication invalid");
+    res.status(StatusCodes.UNAUTHORIZED).send(error.message);
   }
 };
 
