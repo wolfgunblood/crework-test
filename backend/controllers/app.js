@@ -1,6 +1,5 @@
 const Tasks = require("../models/Tasks");
 const { StatusCodes } = require("http-status-codes");
-const { BadRequestError, NotFoundError } = require("../errors");
 const asyncWrapper = require("../middleware/async");
 
 const getAllTasks = async (req, res) => {
