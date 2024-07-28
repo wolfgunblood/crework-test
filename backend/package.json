@@ -1,0 +1,35 @@
+{
+  "name": "js-express-nodejs-boilerplate",
+  "version": "1.0.0",
+  "description": "javascript express nodejs boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolfgunblood/backendmentors.git"
+  },
+  "keywords": [
+    "javascript",
+    "express",
+    "nodejs",
+    "boilerplate"
+  ],
+  "author": "wolfgunblood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolfgunblood/backendmentors/issues"
+  },
+  "homepage": "https://github.com/wolfgunblood/backendmentors#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  }
+}
