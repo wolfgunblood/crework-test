@@ -1,7 +1,9 @@
 const express = require("express");
 const router = require("./routes/app");
+const authRouter = require("./routes/auth");
 const notFound = require("./middleware/not-found");
 const errorHandleMiddleware = require("./middleware/error-handler");
+const authenticateUser = require("./middleware/authentication");
 const connectDB = require("./db/connectDB");
 require("dotenv").config();
 
@@ -11,7 +13,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use("/api/v1", router);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/task", authenticateUser, router);
 app.use(notFound);
 app.use(errorHandleMiddleware);
 
