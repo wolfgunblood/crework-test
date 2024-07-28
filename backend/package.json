@@ -1,7 +1,7 @@
 {
-  "name": "js-express-nodejs-boilerplate",
+  "name": "crework-test",
   "version": "1.0.0",
-  "description": "javascript express nodejs boilerplate",
+  "description": "crework full stack test",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wolfgunblood/backendmentors.git"
+    "url": "git+https://github.com/wolfgunblood/crework-test.git"
   },
   "keywords": [
     "javascript",
@@ -21,9 +21,9 @@
   "author": "wolfgunblood",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wolfgunblood/backendmentors/issues"
+    "url": "https://github.com/wolfgunblood/crework-test/issues"
   },
-  "homepage": "https://github.com/wolfgunblood/backendmentors#readme",
+  "homepage": "https://github.com/wolfgunblood/crework-test#readme",
   "devDependencies": {
     "nodemon": "^3.1.2"
   },
