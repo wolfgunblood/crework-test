@@ -15,7 +15,7 @@ const TaskSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: {
-        values: ["todo", "in-progress", "under-review", "finished"],
+        values: ["todo", "inProgress", "underReview", "finished"],
         message: "{VALUE} is not supported",
       },
       required: [true, "Please provide status"],
