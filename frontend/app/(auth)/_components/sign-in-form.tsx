@@ -29,6 +29,7 @@ const formSchema = z.object({
 })
 
 export function SignInForm() {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -59,6 +60,8 @@ export function SignInForm() {
       } else {
         console.log('No token received')
       }
+
+      router.push('/')
     } catch (error) {
       console.log('something went wrong')
     }
@@ -73,8 +76,6 @@ export function SignInForm() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
   }
-
-  const router = useRouter()
 
   return (
     <div
