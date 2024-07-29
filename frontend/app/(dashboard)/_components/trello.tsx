@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { Clock, Plus } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import Form from './form'
 
 const cardStyles = {
   padding: '14px 13px',
@@ -151,10 +152,7 @@ const Trello = () => {
                 </div>
               )
             })}
-            <Button className="flex justify-between">
-              <span>Add New</span>
-              <Plus />
-            </Button>
+            <Form />
           </div>
         )
       })}
