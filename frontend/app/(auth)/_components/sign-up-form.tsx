@@ -42,59 +42,59 @@ export function SignUpForm() {
         console.log(values)
     }
 
+
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="username"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Username</FormLabel>
-                            <FormControl>
-                                <Input placeholder="username" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                This is your user name
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Email" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                This is your email id.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                                <Input placeholder="password" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                This is your password.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+        <div
+            className="flex flex-col gap-8 rounded-2xl bg-gradient-to-b from-[#F7F7F7] to-[#F0F0F0]"
+            style={{ border: '1px solid #CECECE', padding: '60px' }}
+        >
+
+            <h1 className="font-barlow text-5xl font-semibold leading-14 text-center">Welcome to{" "}
+                <span className="font-barlow text-5xl font-semibold leading-14 text-center">Workflo!</span>
+            </h1>
+
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                    <FormField
+                        control={form.control}
+                        name="username"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="hidden">Full name</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Full name" {...field} />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="hidden">Email</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Your email" {...field} />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="hidden">Password</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Password" {...field} />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Sign up</Button>
+                </form>
+            </Form>
+            <p className="font-inter text-base font-normal leading-custom text-center">Already have an account?<span>Login</span></p>
+        </div>
     )
 }
