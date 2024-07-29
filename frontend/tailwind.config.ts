@@ -26,6 +26,7 @@ const config = {
         "14": "57.6px",
         custom: "24.2px",
         "custom-1": "16.94px",
+        "custom-2": "19.36px",
       },
       colors: {
         border: "hsl(var(--border))",
