@@ -1,7 +1,12 @@
 import React from 'react'
 import { X, Maximize2, Share2, Star } from 'lucide-react'
+interface RightSlideModalProps {
+  isOpen: boolean
+  onClose: () => void
+  children: React.ReactNode
+}
 
-const RightSlideModal = ({ isOpen, onClose, children }) => {
+const RightSlideModal = ({ isOpen, onClose, children }: RightSlideModalProps) => {
   return (
     <div className={`fixed inset-0 flex ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
       <div className={`absolute inset-0 bg-black opacity-50`} onClick={onClose}></div>
