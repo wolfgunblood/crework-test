@@ -15,6 +15,9 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useState } from 'react'
+import { Eye, EyeOff } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -35,11 +38,46 @@ export function SignUpForm() {
       email: '',
       password: '',
     },
+    mode: 'onChange',
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const bodyData = JSON.stringify(values)
+
+      const response = await fetch('https://crework-test.onrender.com/api/v1/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: bodyData,
+      })
+
+      const data = await response.json()
+      console.log(data)
+
+      if (data.token) {
+        document.cookie = `jwtToken=${data.token}; path=/; Secure`
+        console.log('Session token set as cookie')
+      } else {
+        console.log('No token received')
+      }
+    } catch (error) {
+      console.log('something went wrong')
+    }
   }
+  const {
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = form
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const router = useRouter()
 
   return (
     <div
@@ -48,7 +86,9 @@ export function SignUpForm() {
     >
       <h1 className="text-center font-barlow text-5xl font-semibold leading-14">
         Welcome to{' '}
-        <span className="text-center font-barlow text-5xl font-semibold leading-14">Workflo!</span>
+        <span className="text-center font-barlow text-5xl font-semibold leading-14 text-[#2F2188]">
+          Workflo!
+        </span>
       </h1>
 
       <Form {...form}>
@@ -62,6 +102,7 @@ export function SignUpForm() {
                 <FormControl>
                   <Input placeholder="Full name" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -74,6 +115,7 @@ export function SignUpForm() {
                 <FormControl>
                   <Input placeholder="Your email" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -84,16 +126,41 @@ export function SignUpForm() {
               <FormItem>
                 <FormLabel className="hidden">Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Password" {...field} />
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                      {...field}
+                    />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5">
+                      <button
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        style={{ outline: 'none' }}
+                      >
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                      </button>
+                    </div>
+                  </div>
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Sign up</Button>
+          <Button
+            type="submit"
+            disabled={!isDirty || !isValid}
+            style={{ background: 'linear-gradient(180deg, #4C38C2 0%, #2F2188 100%)' }}
+          >
+            Sign up
+          </Button>
         </form>
       </Form>
       <p className="text-center font-inter text-base font-normal leading-custom">
-        Already have an account?<span>Login</span>
+        Already have an account?{' '}
+        <span className="cursor-pointer text-[#4C38C2]" onClick={() => router.push('signin')}>
+          Log in.
+        </span>
       </p>
     </div>
   )

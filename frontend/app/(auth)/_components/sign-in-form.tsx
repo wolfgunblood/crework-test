@@ -16,6 +16,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Eye, EyeOff } from 'lucide-react'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   email: z
@@ -32,6 +35,7 @@ export function SignInForm() {
       email: '',
       password: '',
     },
+    mode: 'onChange',
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -60,6 +64,18 @@ export function SignInForm() {
     }
   }
 
+  const {
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = form
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const router = useRouter()
+
   return (
     <div
       className="flex flex-col gap-8 rounded-2xl bg-gradient-to-b from-[#F7F7F7] to-[#F0F0F0]"
@@ -67,7 +83,9 @@ export function SignInForm() {
     >
       <h1 className="text-center font-barlow text-5xl font-semibold leading-14">
         Welcome to{' '}
-        <span className="text-center font-barlow text-5xl font-semibold leading-14">Workflo!</span>
+        <span className="text-center font-barlow text-5xl font-semibold leading-14 text-[#2F2188]">
+          Workflo!
+        </span>
       </h1>
 
       <Form {...form}>
@@ -81,6 +99,7 @@ export function SignInForm() {
                 <FormControl>
                   <Input placeholder="Your email" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -91,16 +110,43 @@ export function SignInForm() {
               <FormItem>
                 <FormLabel className="hidden">Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Password" {...field} />
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                      {...field}
+                    />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5">
+                      <button
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        style={{ outline: 'none' }}
+                      >
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                      </button>
+                    </div>
+                  </div>
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Login</Button>
+          <Button
+            type="submit"
+            disabled={!isDirty || !isValid}
+            style={{
+              background: 'linear-gradient(180deg, #4C38C2 0%, #2F2188 100%)',
+            }}
+          >
+            Login
+          </Button>
         </form>
       </Form>
       <p className="text-center font-inter text-base font-normal leading-custom">
-        Already have an account?<span>Login</span>
+        Don&apos;t have an account? Create a{' '}
+        <span className="cursor-pointer text-[#4C38C2]" onClick={() => router.push('signup')}>
+          new account.
+        </span>
       </p>
     </div>
   )
