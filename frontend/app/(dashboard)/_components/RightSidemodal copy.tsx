@@ -8,7 +8,7 @@ interface RightSlideModalProps {
 
 const RightSlideModal = ({ isOpen, onClose, children }: RightSlideModalProps) => {
   return (
-    <div className={`fixed inset-0 flex ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+    <div className={`z-99 fixed inset-0 flex ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
       <div className={`absolute inset-0 bg-black opacity-50`} onClick={onClose}></div>
       <div className="relative h-full min-w-[670px] space-y-8 bg-white p-4 shadow-lg">
         <div className="flex items-center justify-between">
