@@ -21,8 +21,8 @@ const getTask = asyncWrapper(async (req, res, next) => {
 
 const createTask = asyncWrapper(async (req, res) => {
   req.body.createdBy = req.user.userId;
-  const job = await Tasks.create(req.body);
-  res.status(StatusCodes.CREATED).json({ job });
+  const task = await Tasks.create(req.body);
+  res.status(StatusCodes.CREATED).json({ task });
 });
 
 const updateTask = asyncWrapper(async (req, res, next) => {
