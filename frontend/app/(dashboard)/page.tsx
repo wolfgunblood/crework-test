@@ -8,10 +8,8 @@ function getCookie(name: string): string | undefined {
   const parts = value.split(`; ${name}=`)
 
   if (parts.length === 2) {
-    // Ensure that the result of parts.pop() is not undefined.
     const lastPart = parts.pop()
     if (lastPart) {
-      // Split the last part on ';' and take the first element, which is the cookie value.
       const cookieValue = lastPart.split(';')[0]
       return cookieValue
     }

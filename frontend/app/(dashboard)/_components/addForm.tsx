@@ -40,34 +40,70 @@ const FormSchema = z.object({
       required_error: 'Please provide status.',
     })
     .min(1, { message: 'Title required' }),
-  description: z.string(),
-  status: z.string({
-    required_error: 'Please provide status.',
-  }),
+  description: z.string().optional(),
+  status: z
+    .string({
+      required_error: 'Please provide status.',
+    })
+    .min(1, { message: 'Status required' }),
   priority: z.string().optional(),
-  deadline: z.date(),
+  deadline: z.date().optional(),
 })
+
+function getCookie(name: string): string | undefined {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+
+  if (parts.length === 2) {
+    const lastPart = parts.pop()
+    if (lastPart) {
+      const cookieValue = lastPart.split(';')[0]
+      return cookieValue
+    }
+  }
+  console.error(`Cookie named ${name} is not found or the cookie format is incorrect.`)
+  return undefined
+}
 
 export function SelectForm({ id }: { id: string }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       title: '',
-      description: '',
       status: id,
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
-    form.reset()
+  async function onSubmit(values: z.infer<typeof FormSchema>) {
+    try {
+      const token = getCookie('jwtToken')
+
+      const bodyData = JSON.stringify(values)
+
+      const response = await fetch('https://crework-test.onrender.com/api/v1/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: bodyData,
+      })
+
+      const data = await response.json()
+      console.log(data)
+
+      toast({
+        title: 'You received the following values:',
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          </pre>
+        ),
+      })
+      form.reset()
+    } catch (error) {
+      console.log('something went wrong')
+    }
   }
 
   return (
@@ -189,6 +225,7 @@ export function SelectForm({ id }: { id: string }) {
                         <SelectItem value="urgent">Urgent</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -231,6 +268,7 @@ export function SelectForm({ id }: { id: string }) {
                         />
                       </PopoverContent>
                     </Popover>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -254,6 +292,7 @@ export function SelectForm({ id }: { id: string }) {
                     <FormControl>
                       <Input placeholder="Not Selected" {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
