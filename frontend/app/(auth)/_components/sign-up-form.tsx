@@ -21,7 +21,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
-  username: z.string().min(2, {
+  name: z.string().min(2, {
     message: 'Username must be at least 2 characters.',
   }),
   email: z
@@ -36,7 +36,7 @@ export function SignUpForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      name: '',
       email: '',
       password: '',
     },
@@ -100,7 +100,7 @@ export function SignUpForm() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
           <FormField
             control={form.control}
-            name="username"
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="hidden">Full name</FormLabel>
