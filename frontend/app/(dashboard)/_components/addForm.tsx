@@ -86,7 +86,7 @@ export function SelectForm() {
             )}
           />
           <div className="grid grid-cols-2">
-            <div className="flex flex-col justify-center gap-8">
+            <div className="flex flex-col gap-8">
               <div className="flex items-center gap-4 rounded p-2">
                 <Loader size={24} stroke="#797979" strokeWidth={1.5} />
                 <span
@@ -124,7 +124,7 @@ export function SelectForm() {
                 </span>
               </div>
             </div>
-            <div className="flex flex-col justify-center gap-8">
+            <div className="flex flex-col gap-8">
               <FormField
                 control={form.control}
                 name="status"
@@ -144,7 +144,10 @@ export function SelectForm() {
                     <Select onValueChange={field.onChange}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Not Selected" />
+                          <SelectValue
+                            className="placeholder:text-muted-foreground"
+                            placeholder="Not Selected"
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -210,7 +213,7 @@ export function SelectForm() {
                         <FormControl>
                           <Button
                             variant={'temp'}
-                            className={cn('px-4', !field.value && 'text-foreground')}
+                            className={cn('px-3', !field.value && 'text-muted-foreground')}
                           >
                             {field.value ? format(field.value, 'PPP') : <span>Not Selected</span>}
                             {/* <CalendarIcon className="ml-auto h-4 w-4 opacity-50" /> */}
