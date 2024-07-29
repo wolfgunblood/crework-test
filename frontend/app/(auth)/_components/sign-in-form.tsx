@@ -19,6 +19,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
   email: z
@@ -63,6 +64,9 @@ export function SignInForm() {
 
       router.push('/')
     } catch (error) {
+      toast({
+        title: 'Unauthorised',
+      })
       console.log('something went wrong')
     }
   }

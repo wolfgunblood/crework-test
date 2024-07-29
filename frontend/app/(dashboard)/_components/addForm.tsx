@@ -102,6 +102,9 @@ export function SelectForm({ id }: { id: string }) {
       })
       form.reset()
     } catch (error) {
+      toast({
+        title: 'Unauthorised',
+      })
       console.log('something went wrong')
     }
   }

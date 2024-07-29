@@ -18,6 +18,7 @@ import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { toast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -66,6 +67,9 @@ export function SignUpForm() {
 
       router.push('/')
     } catch (error) {
+      toast({
+        title: 'Unauthorised',
+      })
       console.log('something went wrong')
     }
   }
