@@ -35,13 +35,15 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
 const FormSchema = z.object({
-  title: z.string().min(1),
-  description: z.string(),
-  status: z
+  title: z
     .string({
       required_error: 'Please provide status.',
     })
-    .optional(),
+    .min(1, { message: 'Title required' }),
+  description: z.string(),
+  status: z.string({
+    required_error: 'Please provide status.',
+  }),
   priority: z.string().optional(),
   deadline: z.date(),
 })
@@ -52,8 +54,6 @@ export function SelectForm() {
     defaultValues: {
       title: '',
       description: '',
-      status: '',
-      priority: '',
     },
   })
 
@@ -82,9 +82,11 @@ export function SelectForm() {
                 <FormControl>
                   <input className="input-style" placeholder="Title" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
+
           <div className="grid grid-cols-2">
             <div className="flex flex-col gap-8">
               <div className="flex items-center gap-4 rounded p-2">
@@ -141,13 +143,10 @@ export function SelectForm() {
                         </span>
                       </div>
                     </FormLabel>
-                    <Select onValueChange={field.onChange}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue
-                            className="placeholder:text-muted-foreground"
-                            placeholder="Not Selected"
-                          />
+                          <SelectValue placeholder="Not Selected" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -157,6 +156,7 @@ export function SelectForm() {
                         <SelectItem value="finished">Finished</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -176,7 +176,7 @@ export function SelectForm() {
                         </span>
                       </div>
                     </FormLabel>
-                    <Select onValueChange={field.onChange}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Not Selected" />
