@@ -1,5 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button";
+import { Sidebar } from "./_components/Sidebar";
+import Dashboard from "./_components/Dashboard";
 
 function getCookie(name: string) {
   const value = `; ${document.cookie}`;
@@ -29,8 +31,9 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <Button onClick={getTask}>Get Task</Button>
+    <div className="min-h-screen flex">
+      <Sidebar />
+      <Dashboard />
     </div>
   );
 }

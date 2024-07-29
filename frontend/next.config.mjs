@@ -1,4 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+/** @type {import("next").NextConfig} */
+const config = {
+  images: {
+    domains: ["s3-alpha-sig.figma.com", "cdn.cloudflare.steamstatic.com"],
+  },
+};
 
-export default nextConfig;
+export default config;

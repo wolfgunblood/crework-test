@@ -25,6 +25,7 @@ const config = {
       lineHeight: {
         "14": "57.6px",
         custom: "24.2px",
+        "custom-1": "16.94px",
       },
       colors: {
         border: "hsl(var(--border))",
