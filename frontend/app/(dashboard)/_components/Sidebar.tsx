@@ -9,7 +9,7 @@ import { ArrowDownToLine, Download } from "lucide-react";
 export const Sidebar = () => {
   return (
     <div
-      className="w-[285px] min-h-screen bg-white border-r flex flex-col justify-between"
+      className="min-w-[285px] min-h-screen bg-white border-r flex flex-col justify-between"
       style={{
         border: "0px 1px 0px 0px solid #DEDEDE",
         padding: "24px 16px 32px 16px",
@@ -22,7 +22,7 @@ export const Sidebar = () => {
       </div>
       <div className="flex gap-2 p-2 rounded-lg">
         <ArrowDownToLine size={40} stroke="#666666" strokeWidth={1.5} />
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1" style={{ background: "#F3F3F3" }}>
           <h3
             className="font-inter text-xl font-medium leading-custom"
             style={{ color: "#666666" }}
