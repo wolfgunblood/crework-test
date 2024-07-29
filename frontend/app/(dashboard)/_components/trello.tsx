@@ -5,6 +5,11 @@ import Image from 'next/image'
 import React from 'react'
 import Form from './form'
 
+function capitalizeFirstLetter(str: string) {
+  if (!str) return str
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 const cardStyles = {
   padding: '14px 13px',
   gap: '16px',
@@ -130,7 +135,7 @@ const Trello = () => {
                         className="font-inter text-xs font-normal leading-custom-3"
                         style={{ color: '#FFFFFF' }}
                       >
-                        {item.priority}
+                        {capitalizeFirstLetter(item.priority)}
                       </span>
                     </button>
                     <div className="flex items-center gap-2">
