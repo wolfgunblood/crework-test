@@ -106,6 +106,35 @@ export function SelectForm({ id }: { id: string }) {
         ),
       })
       form.reset()
+
+      let columnKey = data.task.status
+      console.log(columnKey)
+
+      if (!columns[columnKey]) {
+        console.error(`Column ${columnKey} does not exist!`)
+        return
+      }
+
+      const updatedColumns = {
+        ...columns,
+        [columnKey]: {
+          ...columns[columnKey],
+          tasks: [
+            ...columns[columnKey].tasks,
+            {
+              id: data.task._id,
+              title: data.task.title,
+              description: data.task.description,
+              priority: data.task.priority,
+              deadline: data.task.deadline,
+              createdAt: data.task.createdAt,
+            },
+          ],
+        },
+      }
+      console.log(updatedColumns)
+
+      setColumns(updatedColumns)
     } catch (error) {
       toast({
         title: 'Unauthorised',
