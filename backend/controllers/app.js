@@ -3,10 +3,10 @@ const { StatusCodes } = require("http-status-codes");
 const asyncWrapper = require("../middleware/async");
 
 const getAllTasks = async (req, res) => {
-  const jobs = await Tasks.find({ createdBy: req.user.userId }).sort(
+  const tasks = await Tasks.find({ createdBy: req.user.userId }).sort(
     "createdAt"
   );
-  res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
+  res.status(StatusCodes.OK).json({ tasks, count: tasks.length });
 };
 
 const getTask = asyncWrapper(async (req, res, next) => {
