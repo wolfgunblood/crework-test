@@ -10,6 +10,7 @@ const TaskSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
+      default: "Hello World!!!",
     },
     status: {
       type: String,
@@ -25,6 +26,7 @@ const TaskSchema = new mongoose.Schema(
         values: ["low", "medium", "urgent"],
         message: "{VALUE} is not supported",
       },
+      default: "low",
     },
     deadline: { type: Date },
     createdBy: {
