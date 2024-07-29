@@ -48,12 +48,13 @@ const FormSchema = z.object({
   deadline: z.date(),
 })
 
-export function SelectForm() {
+export function SelectForm({ id }: { id: string }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       title: '',
       description: '',
+      status: id,
     },
   })
 
@@ -151,8 +152,8 @@ export function SelectForm() {
                       </FormControl>
                       <SelectContent>
                         <SelectItem value="todo">To do</SelectItem>
-                        <SelectItem value="in-progress">In Progress</SelectItem>
-                        <SelectItem value="under-review">Under Review</SelectItem>
+                        <SelectItem value="inProgress">In Progress</SelectItem>
+                        <SelectItem value="underReview">Under Review</SelectItem>
                         <SelectItem value="finished">Finished</SelectItem>
                       </SelectContent>
                     </Select>

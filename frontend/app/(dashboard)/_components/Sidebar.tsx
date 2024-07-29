@@ -5,6 +5,7 @@ import { SidebarRoutes } from './sidebar-routes'
 import Image from 'next/image'
 import SidebarTop from './sidebar-top'
 import { ArrowDownToLine, CirclePlus, Download } from 'lucide-react'
+import Form from './new-form'
 
 export const Sidebar = () => {
   return (
@@ -18,7 +19,7 @@ export const Sidebar = () => {
       <div className="flex flex-col gap-4">
         <SidebarTop />
         <SidebarRoutes />
-        <Button
+        {/* <Button
           variant="ghost"
           className="flex items-center justify-between py-2"
           style={{ background: 'linear-gradient(180deg, #4C38C2 0%, #2F2188 100%)' }}
@@ -31,7 +32,8 @@ export const Sidebar = () => {
             Create new task
           </span>
           <Image src="./CirclePlus.svg" alt="Circle Plus" width={24} height={24} />
-        </Button>
+        </Button> */}
+        <Form id="" type="one" />
       </div>
       <div className="flex cursor-pointer items-center justify-between gap-2 rounded-lg p-2">
         <ArrowDownToLine size={40} stroke="#666666" strokeWidth={1.5} />

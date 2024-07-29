@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Calendar, CircleHelp, Filter, Search, Share2, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import Form from './new-form'
 
 const data = [
   {
@@ -113,7 +114,7 @@ const Dashtop = () => {
             </span>
             <Share2 size={24} stroke="#797979" strokeWidth={1.5} />
           </div>
-          <Button
+          {/* <Button
             variant="ghost"
             className="flex items-center justify-between gap-2"
             style={{ background: 'linear-gradient(180deg, #4C38C2 0%, #2F2188 100%)' }}
@@ -126,7 +127,8 @@ const Dashtop = () => {
               Create new
             </span>
             <Image src="./CirclePlus.svg" alt="Circle Plus" width={24} height={24} />
-          </Button>
+          </Button> */}
+          <Form id="" type="second" />
         </div>
       </div>
     </div>

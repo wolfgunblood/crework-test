@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { SelectForm } from './addForm'
 import { Separator } from '@/components/ui/separator'
 
-const Form = () => {
+const Form = ({ id }: { id: string }) => {
   const [isModalOpen, setModalOpen] = useState(false)
 
   const openModal = () => setModalOpen(true)
@@ -29,9 +29,10 @@ const Form = () => {
         </span>
         <Plus size={24} stroke="#E3E1E1" strokeWidth={1.5} />
       </Button>
+
       <RightSlideModal isOpen={isModalOpen} onClose={closeModal}>
         <div className="flex flex-col gap-8">
-          <SelectForm />
+          <SelectForm id={id} />
           <Separator />
           <span
             className="font-inter text-base font-normal leading-custom-2"

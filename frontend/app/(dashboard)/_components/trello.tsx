@@ -244,7 +244,7 @@ const Trello = () => {
                 </div>
               )
             })}
-            <Form />
+            <Form id={column.id} />
           </div>
         )
       })}
