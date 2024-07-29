@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import React from 'react'
 
@@ -28,7 +29,14 @@ const SidebarTop = () => {
             <Image key={index} src={item.path} alt={item.alt} width={24} height={24} />
           ))}
         </div>
-        <span>logout</span>
+        <Button variant="ghost" className="bg-[#F4F4F4]">
+          <span
+            className="font-inter text-base font-medium leading-custom-2"
+            style={{ color: '#797979' }}
+          >
+            Logout
+          </span>
+        </Button>
       </div>
     </div>
   )
