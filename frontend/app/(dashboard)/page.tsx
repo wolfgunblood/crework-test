@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Sidebar } from './_components/Sidebar'
 import Dashboard from './_components/Dashboard'
+import { ColumnsProvider } from './_components/ColumnsContext'
 
 function getCookie(name: string): string | undefined {
   const value = `; ${document.cookie}`
@@ -38,9 +39,11 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <Dashboard />
-    </div>
+    <ColumnsProvider>
+      <div className="flex min-h-screen">
+        <Sidebar />
+        <Dashboard />
+      </div>
+    </ColumnsProvider>
   )
 }

@@ -33,6 +33,7 @@ import { toast } from '@/components/ui/use-toast'
 import { Plus } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
+import { useColumns } from './ColumnsContext'
 
 const FormSchema = z.object({
   title: z
@@ -73,6 +74,10 @@ export function SelectForm({ id }: { id: string }) {
       status: id,
     },
   })
+
+  const { columns, setColumns } = useColumns()
+
+  // console.log(columns)
 
   async function onSubmit(values: z.infer<typeof FormSchema>) {
     try {

@@ -5,6 +5,7 @@ import { Clock, Plus } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Form from './form'
+import { useColumns } from './ColumnsContext'
 
 function capitalizeFirstLetter(str: String) {
   if (!str) return str
@@ -119,7 +120,8 @@ const initialColumns: Columns = {
 }
 
 const Trello = () => {
-  const [columns, setColumns] = useState<Columns>(initialColumns)
+  // const [columns, setColumns] = useState<Columns>(initialColumns)
+  const { columns, setColumns } = useColumns()
 
   const handleDragStart = (
     e: React.DragEvent<HTMLDivElement>,
@@ -163,7 +165,7 @@ const Trello = () => {
       }))
     }
   }
-  console.log(columns)
+  // console.log(columns)
 
   return (
     <div className="flex gap-4 bg-white p-4">
