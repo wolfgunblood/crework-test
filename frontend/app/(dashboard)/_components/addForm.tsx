@@ -259,7 +259,9 @@ export function SelectForm() {
             </div>
           </div>
 
-          <Button type="submit">Submit</Button>
+          <Button variant="ghost" type="submit">
+            Submit
+          </Button>
         </form>
       </Form>
       <div className="inline-flex items-center gap-6">

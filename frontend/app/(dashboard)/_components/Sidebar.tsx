@@ -33,7 +33,7 @@ export const Sidebar = () => {
           <Image src="./CirclePlus.svg" alt="Circle Plus" width={24} height={24} />
         </Button>
       </div>
-      <div className="flex gap-2 rounded-lg p-2">
+      <div className="flex cursor-pointer items-center justify-between gap-2 rounded-lg p-2">
         <ArrowDownToLine size={40} stroke="#666666" strokeWidth={1.5} />
         <div className="flex flex-col gap-1" style={{ background: '#F3F3F3' }}>
           <h3

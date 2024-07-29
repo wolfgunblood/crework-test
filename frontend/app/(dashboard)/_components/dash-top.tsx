@@ -115,7 +115,7 @@ const Dashtop = () => {
           </div>
           <Button
             variant="ghost"
-            className="flex items-center justify-between"
+            className="flex items-center justify-between gap-2"
             style={{ background: 'linear-gradient(180deg, #4C38C2 0%, #2F2188 100%)' }}
           >
             {' '}
