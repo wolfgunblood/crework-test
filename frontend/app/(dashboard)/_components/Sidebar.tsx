@@ -19,20 +19,6 @@ export const Sidebar = () => {
       <div className="flex flex-col gap-4">
         <SidebarTop />
         <SidebarRoutes />
-        {/* <Button
-          variant="ghost"
-          className="flex items-center justify-between py-2"
-          style={{ background: 'linear-gradient(180deg, #4C38C2 0%, #2F2188 100%)' }}
-        >
-          {' '}
-          <span
-            className="font-inter text-xl font-medium leading-custom"
-            style={{ color: '#FFFFFF' }}
-          >
-            Create new task
-          </span>
-          <Image src="./CirclePlus.svg" alt="Circle Plus" width={24} height={24} />
-        </Button> */}
         <Form id="" type="one" />
       </div>
       <div className="flex cursor-pointer items-center justify-between gap-2 rounded-lg p-2">

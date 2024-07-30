@@ -1,16 +1,6 @@
 'use client'
 
-import {
-  Layout,
-  Compass,
-  List,
-  BarChart,
-  Users,
-  Home,
-  SquareKanban,
-  Settings,
-  ChartLine,
-} from 'lucide-react'
+import { Users, Home, SquareKanban, Settings, ChartLine } from 'lucide-react'
 import SidebarItem from './sidebar-item'
 import { usePathname } from 'next/navigation'
 
