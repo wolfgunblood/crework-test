@@ -5,6 +5,8 @@
 </div>
 <br />
 
+![](https://github.com/wolfgunblood/crework-test/blob/main/frontend/public/creworkhone.png)
+
 # Tello
 
 Tello is a trello style app which has sign in ,sign up create task and drag n drop functionality.
@@ -18,7 +20,7 @@ This app is build using Next.js and Node.
 ## Showcase 🎬
 
 You can see a GIF of my application below.Preview the main functionality of the app. <br /> <br />
-![](?raw=true)
+![](https://github.com/wolfgunblood/crework-test/blob/main/frontend/public/demo.gif?raw=true)
 
 ## Table of Contents
 
@@ -74,7 +76,7 @@ npm run dev
 ## Design Patterns
 
 <div align="center">
-<img src="public/design-patterns.jpeg" alt="Banner Image for Design pattern" width="300">
+<img src="frontend/public/design-patterns.jpeg" alt="Banner Image for Design pattern" width="300">
 </div>
 
 **Maintainability** - I have tried to keep components modular and scalable and dynamic, with an emphasis on reusability and readability.
