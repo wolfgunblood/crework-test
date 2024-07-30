@@ -65,6 +65,13 @@ export function SignUpForm() {
         console.log('No token received')
       }
 
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user.name))
+        console.log('User data set in localStorage')
+      } else {
+        console.log('No user data received')
+      }
+
       router.push('/')
     } catch (error) {
       toast({

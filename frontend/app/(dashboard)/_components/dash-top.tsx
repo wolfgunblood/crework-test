@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Calendar, CircleHelp, Filter, Search, Share2, Sparkles } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from './new-form'
 
 const data = [
@@ -30,6 +30,16 @@ const data = [
 ]
 
 const Dashtop = () => {
+  const [firstName, setFirstName] = useState('Test')
+
+  useEffect(() => {
+    const user = localStorage.getItem('user')
+    // console.log(user)
+    const name = user || 'Test'
+    const firstName = name.split(' ')[0]
+    setFirstName(firstName.replace(/(^"|"$)/g, ''))
+  }, [])
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -37,7 +47,7 @@ const Dashtop = () => {
           className="text-left font-barlow text-5xl font-semibold leading-14"
           style={{ color: '#080808' }}
         >
-          Good morning, Joe!
+          Good morning, {firstName}!
         </h1>
         <div className="inline-flex items-center gap-2">
           <p

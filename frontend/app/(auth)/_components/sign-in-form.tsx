@@ -53,13 +53,20 @@ export function SignInForm() {
       })
 
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
 
       if (data.token) {
         document.cookie = `jwtToken=${data.token}; path=/; Secure`
         console.log('Session token set as cookie')
       } else {
         console.log('No token received')
+      }
+
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user.name))
+        console.log('User data set in localStorage')
+      } else {
+        console.log('No user data received')
       }
 
       router.push('/')

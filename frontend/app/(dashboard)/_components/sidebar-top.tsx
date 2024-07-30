@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const svg = [
   { path: '/bell.svg', alt: 'Bell' },
@@ -9,6 +9,12 @@ const svg = [
 ]
 
 const SidebarTop = () => {
+  const [userName, setUserName] = useState('Test')
+
+  useEffect(() => {
+    const user = localStorage.getItem('user')
+    setUserName(user?.replace(/(^"|"$)/g, '') || 'Test')
+  }, [])
   return (
     <div className="flex flex-col gap-2">
       <div className="inline-flex items-center gap-2">
@@ -20,7 +26,7 @@ const SidebarTop = () => {
           className="h-8 w-8 rounded-full"
         />
         <h2 className="font-inter text-xl font-medium leading-custom" style={{ color: '#080808' }}>
-          Joe Gardner
+          {userName}
         </h2>
       </div>
       <div className="flex justify-between">
