@@ -81,7 +81,7 @@ const Dashtop = () => {
         ))}
       </div>
       <div className="flex items-center justify-between">
-        <div className="relative">
+        <div className="relative -z-10">
           <div className="absolute right-2.5 top-1/2 -translate-y-1/2 opacity-50">
             <Search />
           </div>
