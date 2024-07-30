@@ -3,13 +3,25 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Clock, Plus } from 'lucide-react'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from './form'
 import { useColumns } from './ColumnsContext'
+import { getCookie } from '@/helpers/getCookies'
+import { formatDate, timeDifferenceFromNow } from '@/helpers/formatTime'
 
 function capitalizeFirstLetter(str: String) {
   if (!str) return str
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+interface Task {
+  _id: string
+  title: string
+  description: string
+  priority: string
+  deadline: string
+  createdAt: string
+  status: string
 }
 
 const cardStyles = {
@@ -27,101 +39,61 @@ const buttonStyles = {
   borderRadius: '8px',
 }
 
-interface Task {
-  id: string
-  title: string
-  description: String
-  status: String
-  priority: String
-  deadline: String
-  createdAt: String
-}
-
-type Column = {
-  id: string
-  title: string
-  tasks: Task[]
-}
-
-interface Columns {
-  [key: string]: Column
-}
-
-const initialColumns: Columns = {
-  todo: {
-    id: 'todo',
-    title: 'To do',
-    tasks: [
-      {
-        id: 'task-1',
-        title: 'Implement User Authentication',
-        description: 'Develop and integrate user authentication using email and password.',
-        status: 'todo',
-        priority: 'urgent',
-        deadline: '2024-08-15',
-        createdAt: '1 hr ago',
-      },
-    ],
-  },
-  inProgress: {
-    id: 'inProgress',
-    title: 'In progress',
-    tasks: [
-      {
-        id: 'task-2',
-        title: 'Design Home Page UI',
-        description: 'Develop and integrate user authentication using email and password.',
-        status: 'in-progress',
-        priority: 'medium',
-        deadline: '2024-08-15',
-        createdAt: '1 hr ago',
-      },
-      {
-        id: 'task-3',
-        title: 'Conduct User Feedback Survey',
-        description: 'Collect and analyze user feedback to improve app features.',
-        status: 'in-progress',
-        priority: 'low',
-        deadline: '2024-08-05',
-        createdAt: '3 hr ago',
-      },
-    ],
-  },
-  underReview: {
-    id: 'underReview',
-    title: 'Under Review',
-    tasks: [
-      {
-        id: 'task-4',
-        title: 'Integrate Cloud Storage',
-        description: 'Enable cloud storage for note backup and synchronization.',
-        status: 'under-review',
-        priority: 'urgent',
-        deadline: '2024-08-20',
-        createdAt: '2 days ago',
-      },
-    ],
-  },
-  finished: {
-    id: 'finished',
-    title: 'Finished',
-    tasks: [
-      {
-        id: 'task-5',
-        title: 'Test Cross-browser Compatibility',
-        description: 'Ensure the app works seamlessly across different web browsers.',
-        status: 'finished',
-        priority: 'medium',
-        deadline: '2024-07-30',
-        createdAt: '4 days ago',
-      },
-    ],
-  },
-}
-
 const Trello = () => {
   // const [columns, setColumns] = useState<Columns>(initialColumns)
+
   const { columns, setColumns } = useColumns()
+
+  const getTask = async () => {
+    const token = getCookie('jwtToken')
+
+    try {
+      const response = await fetch('https://crework-test.onrender.com/api/v1/tasks', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const data = await response.json()
+      // console.log(data)
+      const updatedColumns = { ...columns }
+
+      data.tasks.forEach((task: Task) => {
+        const columnKey = task.status as string
+
+        if (!updatedColumns[columnKey]) {
+          console.error(`Column ${columnKey} does not exist!`)
+          return
+        }
+
+        updatedColumns[columnKey] = {
+          ...updatedColumns[columnKey],
+          tasks: [
+            ...updatedColumns[columnKey].tasks,
+            {
+              id: task._id as string,
+              title: task.title as string,
+              status: task.status as string,
+              description: task.description as string,
+              priority: task.priority as string,
+              deadline: formatDate(task.deadline as string),
+              createdAt: timeDifferenceFromNow(task.createdAt as string),
+            },
+          ],
+        }
+      })
+
+      setColumns(updatedColumns)
+      // console.log(columns)
+    } catch (error) {
+      console.log('something went wrong')
+    }
+  }
+
+  useEffect(() => {
+    getTask()
+  }, [])
 
   const handleDragStart = (
     e: React.DragEvent<HTMLDivElement>,

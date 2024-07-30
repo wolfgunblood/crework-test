@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react'
 
-interface Task {
+export interface Task {
   id: string
   title: string
   description: String
@@ -10,13 +10,13 @@ interface Task {
   createdAt: String
 }
 
-type Column = {
+export type Column = {
   id: string
   title: string
   tasks: Task[]
 }
 
-interface Columns {
+export interface Columns {
   [key: string]: Column
 }
 
@@ -92,7 +92,7 @@ const initialColumns: Columns = {
   },
 }
 
-interface ColumnsContextType {
+export interface ColumnsContextType {
   columns: Columns
   setColumns: React.Dispatch<React.SetStateAction<Columns>>
 }

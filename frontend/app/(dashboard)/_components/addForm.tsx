@@ -34,6 +34,7 @@ import { Plus } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { useColumns } from './ColumnsContext'
+import { formatDate, timeDifferenceFromNow } from '@/helpers/formatTime'
 
 const FormSchema = z.object({
   title: z
@@ -95,20 +96,20 @@ export function SelectForm({ id }: { id: string }) {
       })
 
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
 
       toast({
-        title: 'You received the following values:',
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
+        title: 'Added data successfully',
+        // description: (
+        //   <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        //     <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        //   </pre>
+        // ),
       })
       form.reset()
 
       let columnKey = data.task.status
-      console.log(columnKey)
+      // console.log(columnKey)
 
       if (!columns[columnKey]) {
         console.error(`Column ${columnKey} does not exist!`)
@@ -124,15 +125,16 @@ export function SelectForm({ id }: { id: string }) {
             {
               id: data.task._id,
               title: data.task.title,
+              status: data.task.status,
               description: data.task.description,
               priority: data.task.priority,
-              deadline: data.task.deadline,
-              createdAt: data.task.createdAt,
+              deadline: formatDate(data.task.deadline),
+              createdAt: timeDifferenceFromNow(data.task.createdAt),
             },
           ],
         },
       }
-      console.log(updatedColumns)
+      // console.log(updatedColumns)
 
       setColumns(updatedColumns)
     } catch (error) {
