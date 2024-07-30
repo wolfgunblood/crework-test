@@ -20,7 +20,10 @@ This app is build using Next.js and Node.
 ## Showcase 🎬
 
 You can see a GIF of my application below.Preview the main functionality of the app. <br /> <br />
-![](https://github.com/wolfgunblood/crework-test/blob/main/frontend/public/demo.gif?raw=true)
+
+<!-- ![](https://github.com/wolfgunblood/crework-test/blob/main/frontend/public/demo.gif?raw=true) -->
+
+![](https://github.com/wolfgunblood/crework-test/blob/main/frontend/public/crew.webm?raw=true)
 
 ## Table of Contents
 
